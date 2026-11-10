@@ -459,6 +459,22 @@ Remove spaces from the file name first when using `subtitles=` directly (`mv "my
 
 ---
 
+## Watch on bilibili.com (overlay)
+
+Shows your English `.srt` on top of the Bilibili player.
+
+1. Install Tampermonkey in Chrome. Add `bili-english-overlay.user.js`.
+2. Share the BiliEN folder:
+
+```bash
+cd ~/BiliEN && python3 -m http.server 8765
+```
+
+3. In Tampermonkey's menu, click **Set BiliEN server** → `http://127.0.0.1:8765/`.
+4. Open the episode on bilibili.com. The script finds it through `_Work/index.json`.
+
+---
+
 ## Windows and Linux
 
 The scripts pick the right tools by themselves:
@@ -579,7 +595,6 @@ python3 -m pip install --user --break-system-packages \
 | `run_all.sh` | Shortcut for `python3 bilien.py "$@"`. |
 | `bili2en.py` | Downloader (`download()`, `clean_url()`), `.ass` writer, older all-in-one pipeline. |
 | `bili-english-overlay.user.js` | Tampermonkey: shows the `.srt` over bilibili.com. |
-| `name_fixes.txt` | **Old.** Replaced by `fixes` in the profile. Not read by `fix_names.py`. |
 
 ---
 
@@ -610,6 +625,28 @@ python3 -m pip install --user --break-system-packages \
 | Terminal shows `heredoc>` | The `EOF` line has leading spaces. Ctrl+C and re-paste. |
 | `zsh: no matches found` | A glob matched nothing. Quote it or remove it. |
 | Output cut off | `… > ~/Desktop/out.txt; open ~/Desktop/out.txt` |
+
+---
+
+## Known issues / to-do
+
+Done since the last version:
+
+- ~~Hard-coded series ID~~ → any URL, `--show`, `--list`, `$BILIEN_ROOT`.
+- ~~Save Chinese OCR text~~ → `_Work/<Show> EPNN ZH ocr.srt`.
+- ~~Fold ocrmac into the pipeline~~ → `ocr_zh.py`.
+- ~~Names fixed before the LLM~~ → profile `names` (from the audio) + `notes`.
+- ~~Rate-limit-safe downloads~~ → `--download-only` + list files; skips done episodes.
+
+Still open:
+
+1. **Chinese peeking out** past short English boxes. Idea: full-width black bar per cue on `.ass` Layer 0, English on Layer 1.
+2. **English box covers credits** at the bottom.
+3. **Audio only used for names**, not meaning, so he/she mix-ups can slip through.
+4. **No sleep between downloads** in `bilien.py`. Big batches can still get rate-limited.
+5. **Accept any file path**, not just episode numbers.
+6. **Test on a real Windows PC** and on Linux with an NVIDIA GPU.
+7. Add a license (e.g. MIT).
 
 ---
 
