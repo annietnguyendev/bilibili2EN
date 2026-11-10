@@ -26,11 +26,9 @@ Everything runs locally. No paid API, no API keys.
 - [Run one stage by hand](#run-one-stage-by-hand)
 - [Videos with no Chinese subs (audio only)](#videos-with-no-chinese-subs-audio-only)
 - [Subtitle any other video file](#subtitle-any-other-video-file)
-- [Watch on bilibili.com (overlay)](#watch-on-bilibilicom-overlay)
 - [Windows and Linux](#windows-and-linux)
 - [Scripts](#scripts)
 - [Troubleshooting](#troubleshooting)
-- [Known issues / to-do](#known-issues--to-do)
 - [References](#references)
 
 ---
@@ -625,28 +623,6 @@ python3 -m pip install --user --break-system-packages \
 | Terminal shows `heredoc>` | The `EOF` line has leading spaces. Ctrl+C and re-paste. |
 | `zsh: no matches found` | A glob matched nothing. Quote it or remove it. |
 | Output cut off | `… > ~/Desktop/out.txt; open ~/Desktop/out.txt` |
-
----
-
-## Known issues / to-do
-
-Done since the last version:
-
-- ~~Hard-coded series ID~~ → any URL, `--show`, `--list`, `$BILIEN_ROOT`.
-- ~~Save Chinese OCR text~~ → `_Work/<Show> EPNN ZH ocr.srt`.
-- ~~Fold ocrmac into the pipeline~~ → `ocr_zh.py`.
-- ~~Names fixed before the LLM~~ → profile `names` (from the audio) + `notes`.
-- ~~Rate-limit-safe downloads~~ → `--download-only` + list files; skips done episodes.
-
-Still open:
-
-1. **Chinese peeking out** past short English boxes. Idea: full-width black bar per cue on `.ass` Layer 0, English on Layer 1.
-2. **English box covers credits** at the bottom.
-3. **Audio only used for names**, not meaning, so he/she mix-ups can slip through.
-4. **No sleep between downloads** in `bilien.py`. Big batches can still get rate-limited.
-5. **Accept any file path**, not just episode numbers.
-6. **Test on a real Windows PC** and on Linux with an NVIDIA GPU.
-7. Add a license (e.g. MIT).
 
 ---
 
